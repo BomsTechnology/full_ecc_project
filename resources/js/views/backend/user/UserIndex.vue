@@ -8,7 +8,7 @@
         >
             <router-link
                 :to="{ name: 'admin.user.index' }"
-                class="flex items-end space-x-2 rounded bg-adna-green px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
+                class="flex items-end space-x-2 rounded bg-blue-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
             >
                 <UserPlusIcon class="h-5 w-5" />
                 <span>Add User</span>
@@ -44,11 +44,25 @@
                         </div>
                         <input
                             type="search"
+                            v-model="searchValue"
                             id="table-search"
                             class="block w-full rounded border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 lg:w-80"
                             placeholder="Search for items"
                         />
                     </div>
+                </div>
+                <div class="mt-1 flex justify-end lg:mt-0 lg:block">
+                    <button
+                        type="button"
+                        title="supprimer"
+                        @click="deleteUsers"
+                        class="flex items-center justify-between space-x-2 rounded border border-red-500 p-2 text-red-500 hover:bg-red-500 hover:text-white"
+                    >
+                        <TrashIcon class="h-6 w-6" />
+                        <span class="hidden text-sm font-thin lg:block"
+                            >Supprimer</span
+                        >
+                    </button>
                 </div>
             </div>
             <Error :errors="errors" @cleanErrors="cleanErrors" />
@@ -63,7 +77,7 @@
                 buttons-pagination
                 :loading="loading"
             >
-          <!--  <template #item-avatar="item">
+            <template #item-avatar="item">
                     <img
                         :src="item.avatar"
                         v-if="item.avatar"
@@ -71,48 +85,60 @@
                         class="h-12 w-12 rounded-full object-cover"
                     />
                     <UserCircleIcon v-else class="h-12 w-12 text-gray-700" />
-                </template> -->
+                </template> 
                 <template #item-confirmed="item">
                     <span
                         v-if="item.confirmed == true"
                         class="rounded-full bg-green-500 px-2 py-1 text-white"
-                        >Actived</span
+                        >Confirmed</span
                     >
                     <span v-else class="rounded-full bg-red-500 px-2 py-1 text-white"
-                        >Desactived</span
+                        >Not Confirmed</span
+                    >
+                </template>  
+                <template #item-blocked="item">
+                    <span
+                        v-if="item.blocked == false"
+                        class="rounded-full bg-green-500 px-2 py-1 text-white"
+                        >UnBlocked</span
+                    >
+                    <span v-else class="rounded-full bg-red-500 px-2 py-1 text-white"
+                        >Blocked</span
                     >
                 </template>   
                 <template #item-id="item">
-                    <div class="py-4">
+                    <div class="py-6">
                         <router-link
                             :to="{
                                 name: 'admin.user.index',
                             }"
-                            class="text-green-500 hover:underline"
+                            class="text-blue-500 hover:underline"
                             >Edit</router-link
                         >
                         <button
                             type="button"
-                            v-if="item.confirmed == true"
-                            @click="toogleConfirmed(item.id, false)"
+                            v-if="item.confirmed != true"
+                            @click="confirmedUser(item.id)"
                             class="ml-3 text-purple-600 hover:underline"
                         >
-                            Desactived
+                            Confirmed
+                        </button>
+                        <button
+                            type="button"
+                            v-if="item.blocked != true"
+                            @click="toogleBlocked(item.id)"
+                            class="ml-3 text-red-600 hover:underline"
+                        >
+                            Blocked
                         </button>
                         <button
                             type="button"
                             v-else
-                            @click="toogleConfirmed(item.id, true)"
-                            class="ml-3 text-purple-600 hover:underline"
+                            @click="toogleBlocked(item.id)"
+                            class="ml-3 text-green-600 hover:underline"
                         >
-                            Actived
-                        </button>
-                        <button
-                            type="button"
-                            @click="deleteUser(item.id)"
-                            class="ml-3 text-red-600 hover:underline"
-                        >
-                            Delete
+
+                            <span >UnBlocked</span>
                         </button>
                     </div>
                 </template>
@@ -136,14 +162,15 @@ const {
     getUsers,
     searchField,
     searchValue,
-    toogleConfirmed,
+    confirmedUser,
     headers,
     users,
     loading,
     errors,
     cleanErrors,
     selectArray,
-    deleteUser,
+    deleteUsers,
+    toogleBlocked,
 } = useUser();
 
 onMounted(async function () { 

@@ -1,7 +1,9 @@
 <script setup>
 import { reactive } from 'vue';
-import { MagnifyingGlassIcon, ChevronDownIcon, ChevronUpIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/solid';
+import { MagnifyingGlassIcon, ChevronDownIcon, ChevronUpIcon, Bars3Icon, XMarkIcon, UserCircleIcon } from '@heroicons/vue/24/solid';
+import { useAuthenticateStore } from "@/stores/authenticate";
 
+const auth = useAuthenticateStore();
 let open = reactive({
   menu:false,
   submenu: {
@@ -34,10 +36,42 @@ let open = reactive({
           <input type="text" class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-lg  focus:border-red-400  focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-red-300" placeholder="Search">
       </div>
 
-      <div class=" lg:flex xl:text-base text-sm hidden w-2/6 px-4 items-center justify-end">
+      <div v-if="!auth.user && !auth.token" class=" lg:flex xl:text-base text-sm hidden w-2/6 px-4 items-center justify-end">
         <router-link :to="{name:'register'}" class="py-2 text-base px-4 text-center rounded-lg bg-gradient-to-r bg-red-500 text-white font-semibold">Rejoindre la communauté</router-link>
         <router-link :to="{name:'login'}"  class="py-2 px-4  text-center text-red-500  font-semibold md:mx-4">Connexion</router-link>
       </div> 
+      <div v-else class=" lg:flex xl:text-base text-sm hidden w-2/6 px-4 items-center justify-end">
+        <router-link
+            :to="{
+                name: 'account',
+            }"
+            class="lg:flex hidden items-center space-x-3"
+            
+        >
+            <div class="text-right">
+                <div class="text-lg">{{ auth.user.username }}</div>
+                <div class="text-sm text-gray-500">
+                    {{ auth.user.email }}
+                </div>
+            </div>
+            <div>
+                <img
+                    v-if="
+                        auth.user.avatar != null &&
+                        auth.user.avatar != 'null'
+                    "
+                    class="h-16 w-16 rounded-full object-cover"
+                    :src="auth.user.avatar "
+                    :alt="auth.user.username"
+                />
+                <UserCircleIcon
+                    v-else
+                    class="h-16 w-16 text-gray-800"
+                />
+            </div>
+        </router-link>
+      </div>
+      
 
       <div @click="open.menu = !open.menu" class="lg:hidden block">
         <button type="button">
@@ -76,11 +110,11 @@ let open = reactive({
              </span>
           </div>
           <div class="absolute z-20 hidden bg-white w-52 shadow top-full left-0 rounded-b-lg text-base  group-hover:block">
-                  <a href="/profils/fideles" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Fidèle</a>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Chargé Paroissial</a>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Groupe de Prière</a>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Diocèse</a>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2 rounded-b-lg  font-semibold block">Siège</a>
+                  <router-link :to="{name:'profile', params: {userType: 'faithful'}}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Fidèle</router-link>
+                  <router-link :to="{name:'profile', params: {userType: 'faithful'}, query: {parish_official:true}}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Chargé Paroissial</router-link>
+                  <router-link :to="{name:'profile', params: {userType: 'prayerGroup'}}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Groupe de Prière</router-link>
+                  <router-link :to="{name:'profile', params: {userType: 'diocese'}}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Diocèse</router-link>
+                  <router-link :to="{name:'profile', params: {userType: 'seat'}}" class="hover:text-white hover:bg-red-500 px-4 py-2 rounded-b-lg  font-semibold block">Siège</router-link>
           </div>
         </li>
         <li class="py-4"><router-link :to="{name:'paroisses'}" class="cursor-pointer p-2 rounded-lg text-left font-semibold text-gray-500 hover:bg-red-500 hover:text-white">Paroisses</router-link></li>
@@ -187,11 +221,11 @@ let open = reactive({
             leave-to-class="translate-x-1/2 opacity-0 "
         >
           <div @click="open.menu =!open.menu" class="shadow rounded-lg my-2 bg-gray-50 text-sm overflow-hidden" v-if="open.submenu.profil">
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Fidèle</a>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Chargé Paroissial</a>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Groupe de Prière</a>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Diocèse</a>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2 rounded-b-lg  font-semibold block">Siège</a>
+                  <router-link :to="{name:'profile', params: {userType: 'faithful'}}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Fidèle</router-link>
+                  <router-link :to="{name:'profile', params: {userType: 'faithful'}, query: {parish_official:true}}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Chargé Paroissial</router-link>
+                  <router-link :to="{name:'profile', params: {userType: 'prayerGroup'}}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Groupe de Prière</router-link>
+                  <router-link :to="{name:'profile', params: {userType: 'diocese'}}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Diocèse</router-link>
+                  <router-link :to="{name:'profile', params: {userType: 'seat'}}" class="hover:text-white hover:bg-red-500 px-4 py-2 rounded-b-lg  font-semibold block">Siège</router-link>
           </div>
           </Transition>
         </li>
@@ -266,10 +300,41 @@ let open = reactive({
         </li>
         <li @click="open.menu =!open.menu" class="py-1 px-6 w-full"><router-link :to="{name:'contact'}" class="cursor-pointer p-2  text-left block font-semibold text-gray-500 hover:bg-red-500 focus:bg-red-500 w-full hover:text-white">Contact</router-link></li>     
       </ul> 
-      <div @click="open.menu =!open.menu" class="text-sm w-full px-4">
-        <a href="#" class="py-2 px-4 block text-center rounded-lg bg-red-500 text-white font-semibold">Rejoindre la communauté</a>
-        <a href="#" class="py-2 px-4 block text-center text-red-500  font-semibold md:mx-4">Se Connecter</a>
+      <div v-if="!auth.user && !auth.token" @click="open.menu =!open.menu" class="text-sm w-full px-4">
+        <router-link :to="{name:'register'}" class="py-2 px-4 block text-center rounded-lg bg-red-500 text-white font-semibold">Rejoindre la communauté</router-link>
+        <router-link :to="{name:'login'}" class="py-2 px-4 block text-center text-red-500  font-semibold md:mx-4">Se Connecter</router-link>
       </div> 
+      <div v-else @click="open.menu =!open.menu" class="w-full px-6 pb-4">
+        <router-link
+            :to="{
+                name: 'account',
+            }"
+            class="flex flex-row-reverse  justify-end items-center  w-full "
+            
+        >
+            <div class="text-left ml-2">
+                <div class="text-base">{{ auth.user.username }}</div>
+                <div class="text-xs text-gray-500">
+                    {{ auth.user.email }}
+                </div>
+            </div>
+            <div>
+                <img
+                    v-if="
+                        auth.user.avatar != null &&
+                        auth.user.avatar != 'null'
+                    "
+                    class="h-16 w-16 rounded-full object-cover"
+                    :src="auth.user.avatar "
+                    :alt="auth.user.username"
+                />
+                <UserCircleIcon
+                    v-else
+                    class="h-16 w-16 text-gray-800"
+                />
+            </div>
+        </router-link>
+      </div>
     </nav>
     </Transition>
    

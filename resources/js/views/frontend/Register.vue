@@ -1,27 +1,26 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
 import RegisterSucess from '@/components/message/RegisterSucess.vue';
-import useRoles from '@/composables/useRoles';
 import useAuth from '@/composables/useAuth';
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/solid"
 
 const showPassword = ref(false);
-const { getRoles, roles, } = useRoles();
 const { errors, loading, createUser, isFinish, cleanErrors, } = useAuth();
+const roles = [
+    {id:'faithful', name:'Fidele'}, 
+    {id:'prayerGroup', name:'Groupe de prière'}, 
+    {id:'parish', name:'Paroisse'}, 
+    {id:'diocese', name:'Diocèse'}, 
+    {id:'seat', name:'Siège'} 
+];
 const user = reactive({
     username: '',
     lastname: '',
     email: '',
     password: '',
-    parishOfficial: false,
-    role: 1,
-    confirmed: false,
-    blocked: true,
+    parish_official: false,
+    user_type: 'faithful',
 })
-
-onMounted(async () => {
-    await getRoles();
-});
 
 const register = async () => {
     await createUser({...user});
@@ -44,32 +43,30 @@ const register = async () => {
                 <form v-else class="flex flex-col w-full py-3 px-4" @submit.prevent="register()">
                     <div class="w-full">
                         <label class="">Type de profil</label>
-                        <select v-model="user.role" class="form-select p-2 outline-none mt-1 border block border-gray-300 rounded-lg shadow-sm w-full">
-                            <template v-for="role in roles"  :key="role.id">
-                                <option v-if="role.name != 'Public' && role.name != 'Admin'" :value="role.id">{{ role.name }}</option>
-                            </template>
+                        <select v-model="user.user_type" class="form-select p-2 outline-none mt-1 border block border-gray-300 rounded-lg shadow-sm w-full">
+                                <option v-for="role in roles"  :key="role.id" :value="role.id">{{ role.name }}</option>
                         </select>
                     </div>
                     <div class="w-full mt-3">
                         <label class="">
-                            <span v-if="user.role == 1">Nom du Fidele</span>
-                            <span v-else-if="user.role == 5">Nom de la  Paroisse</span>
-                            <span v-else-if="user.role == 4">Nom du groupe de prière </span>
-                            <span v-else-if="user.role == 6">Nom du diocèse </span>
-                            <span v-else-if="user.role == 7">Nom du Siège </span>
+                            <span v-if="user.user_type == 'faithful'">Nom du Fidele</span>
+                            <span v-else-if="user.user_type == 'parish'">Nom de la  Paroisse</span>
+                            <span v-else-if="user.user_type == 'prayerGroup'">Nom du groupe de prière </span>
+                            <span v-else-if="user.user_type == 'diocese'">Nom du diocèse </span>
+                            <span v-else-if="user.user_type == 'seat'">Nom du Siège </span>
                         </label>
                         <input v-model="user.username" class="border-gray-300 mt-1 border form-input p-2 outline-none block rounded-lg shadow-sm w-full" type="text" placeholder="Ex: Marc"/>
                     </div>
-                    <div class="w-full mt-3" v-if="user.role == 1">
+                    <div class="w-full mt-3" v-if="user.user_type == 'faithful'">
                         <label class="">Prénom du Fidele</label>
                         <input v-model="user.lastname" class="border-gray-300 mt-1 border form-input p-2 outline-none block rounded-lg shadow-sm w-full" type="text" placeholder="Ex: Emmanuel"/>
                     </div>
-                    <div class="w-full mt-3" v-if="user.role == 1">
+                    <div class="w-full mt-3" v-if="user.user_type == 'faithful'">
                         <label class="">Chargé paroissial</label>
                         <div class=" flex mt-1 items-center space-x-2">
-                            <input type="radio" class="form-radio border-gray-300" id="yes" v-model="user.parishOfficial" :value="true">
+                            <input type="radio" class="form-radio border-gray-300" id="yes" v-model="user.parish_official" :value="true">
                             <label for="yes">Oui</label>
-                            <input type="radio" class="form-radio border-gray-300" id="no" v-model="user.parishOfficial"  :value="false">
+                            <input type="radio" class="form-radio border-gray-300" id="no" v-model="user.parish_official"  :value="false">
                             <label for="no">Non</label>
                         </div>
                     </div>

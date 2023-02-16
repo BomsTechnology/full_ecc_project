@@ -18,21 +18,16 @@ export default function useAuth() {
         errors.value = [];
         loading.value = true;
         await axiosClient
-            .post(`/users`, data)
+            .post(`/register`, data)
             .then((response) => {
                 isFinish.value = true;
                 loading.value = false;
             })
             .catch((e) => {
                 loading.value = false;
-                if (e.response.status == 400) {
-                    if(e.response.data.error.details.errors){
-                        e.response.data.error.details.errors.forEach((err) => {
-                            errors.value.push(err.message);
-                        })
-                    }else{
-                    errors.value.push(e.response.data.error.message);
-                    }
+                if (e.response.status == 422) {
+                    for (const key in e.response.data.errors)
+                        errors.value.push(e.response.data.errors[key][0]);
                 } else {
                     errors.value.push(e.response.data.message);
                 }
@@ -47,20 +42,15 @@ export default function useAuth() {
         errors.value = [];
         loading.value = true;
         await axiosClient
-            .post(`/auth/local?populate=*`, data)
+            .post(`/login`, data)
             .then((response) => {
                 console.log(response.data)
             })
             .catch((e) => {
                 loading.value = false;
-                if (e.response.status == 400) {
-                    if(e.response.data.error.details.errors){
-                        e.response.data.error.details.errors.forEach((err) => {
-                            errors.value.push(err.message);
-                        })
-                    }else{
-                    errors.value.push(e.response.data.error.message);
-                    }
+                if (e.response.status == 422) {
+                    for (const key in e.response.data.errors)
+                        errors.value.push(e.response.data.errors[key][0]);
                 } else {
                     errors.value.push(e.response.data.message);
                 }
@@ -75,22 +65,17 @@ export default function useAuth() {
         errors.value = [];
         loading.value = true;
         await axiosClient
-            .post(`/users-permissions/auth/admin?populate=*`, data)
+            .post(`/login-admin`, data)
             .then((response) => {
-                localStorage.user = JSON.stringify(response.data.user);
-                localStorage.tokenUser = response.data.jwt;
+                localStorage.user = JSON.stringify(response.data.data.user);
+                localStorage.tokenUser = response.data.data.token;
                 loading.value = false;
             })
             .catch((e) => {
                 loading.value = false;
-                if (e.response.status == 400) {
-                    if(e.response.data.error.details.errors){
-                        e.response.data.error.details.errors.forEach((err) => {
-                            errors.value.push(err.message);
-                        })
-                    }else{
-                    errors.value.push(e.response.data.error.message);
-                    }
+                if (e.response.status == 422) {
+                    for (const key in e.response.data.errors)
+                        errors.value.push(e.response.data.errors[key][0]);
                 } else {
                     errors.value.push(e.response.data.message);
                 }
@@ -101,38 +86,29 @@ export default function useAuth() {
             });
     }
 
-    const getLoggedUser = async () => {
+
+    const logout = async () => {
         errors.value = [];
         loading.value = true;
         await axiosClient
-            .post(`/users/me`)
+            .post("/logout")
             .then((response) => {
+                window.localStorage.removeItem("tokenUser");
+                window.localStorage.removeItem("user");
                 loading.value = false;
+                location.href = "/";
             })
             .catch((e) => {
                 loading.value = false;
-                if (e.response.status == 400) {
-                    if(e.response.data.error.details.errors){
-                        e.response.data.error.details.errors.forEach((err) => {
-                            errors.value.push(err.message);
-                        })
-                    }else{
-                    errors.value.push(e.response.data.error.message);
-                    }
-                } else {
-                    errors.value.push(e.response.data.message);
-                }
-                router.replace({
-                    name: route.name,
-                    hash: '#errors'
-                });
+                errors.value.push(e.response.data.message);
             });
-    }
+    };
 
     return {
         errors,
         loading,
         isFinish,
+        logout,
         createUser,
         loginUser,
         loginAdmin,

@@ -12,7 +12,7 @@ const auth = useAuthenticateStore();
 const { errors, loading, loginAdmin, isFinish, cleanErrors, } = useAuth();
 
 const user = reactive({
-    identifier: "",
+    email: "",
     password: "",
 });
 
@@ -48,7 +48,7 @@ const login = async () => {
         <form class="flex flex-col w-full py-3 px-4" @submit.prevent="login()">
             <div class="w-full">
                 <label class="">Adresse mail</label>
-                <input v-model="user.identifier" class="border-gray-300 border form-input p-2 mt-1 outline-none block rounded-lg shadow-sm w-full" type="email" placeholder="Ex: nom@xyz.com"/>
+                <input v-model="user.email" class="border-gray-300 border form-input p-2 mt-1 outline-none block rounded-lg shadow-sm w-full" type="email" placeholder="Ex: nom@xyz.com"/>
             </div>
             <div class="w-full mt-3">
                 <label class="">Mot de passe</label>

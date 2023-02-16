@@ -17,10 +17,22 @@
             </div>
             <div class="py-2 ">
                 <div class=" flex items-center flex-col justify-center p-1 rounded-xl cursor-pointer ">
-                        <div class="flex items-center justify-center text-3xl mb-2 bg-gradient-to-r from-blue-500 to-blue-600 w-32 h-32 text-white font-semibold p-2 rounded-full cursor-pointer">
-                            MS
+                        <div class="flex items-center justify-center overflow-hidden  mb-2 bg-gradient-to-r from-blue-500 to-blue-600 w-32 h-32 text-white font-semibold p-2 rounded-full cursor-pointer">
+                            <img
+                                v-if="
+                                    auth.user.avatar != null &&
+                                    auth.user.avatar != 'null'
+                                "
+                                class="h-full w-full rounded-full object-cover"
+                                :src="auth.user.avatar "
+                                :alt="auth.user.username"
+                            />
+                            <span v-else class="text-5xl uppercase">{{ auth.user.username[0] }}</span>
                         </div>
-                        <h2 class="font-semibold text-white text-lg mx-2">Marc Sigha</h2>
+                        <div class="font-semibold text-white text-lg ">{{ auth.user.username }}</div>
+                        <div class="text-sm text-gray-200">
+                                {{ auth.user.email }}
+                        </div>
                     </div>
             </div>
             <div class=" flex flex-col justify-between">
@@ -80,9 +92,13 @@
 <script setup>
 import { ArrowLeftOnRectangleIcon, BuildingLibraryIcon, DocumentIcon, FilmIcon, MusicalNoteIcon, NewspaperIcon, Squares2X2Icon, UserGroupIcon } from '@heroicons/vue/24/solid';
 import { reactive } from 'vue';
+import { useAuthenticateStore } from "@/stores/authenticate";
+
+const auth = useAuthenticateStore();
 
 const open = reactive({
-menu: true,})
+                menu: true,
+            });
 </script>
 
 <style scoped>

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/register", [AuthenticateController::class, 'register']);
 Route::post("/login", [AuthenticateController::class, 'login']);
-Route::post("/login-admin", [AuthenticateController::class, 'login_admin']);
+Route::post("/login-admin", [AuthenticateController::class, 'loginAdmin']);
 
 Route::get("/continents", [ContinentController::class, 'index']);
 
@@ -25,9 +25,13 @@ Route::get("/cities", [CityController::class, 'index']);
 
 Route::get("/departments", [DepartmentController::class, 'index']);
 
+Route::post("/users/type/{type}", [UserController::class, 'getByType']);
+
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::apiResource('users', UserController::class);
+    Route::put("/users/confirmed/{user}", [UserController::class, 'confirmed']);
+    Route::put("/users/toogle-blocked/{user}", [UserController::class, 'toogleBlocked']);
 
     Route::post("/continents", [ContinentController::class, 'store']);
     Route::get("/continents/{continent}", [ContinentController::class, 'show']);

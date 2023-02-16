@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="w-full">
     <Transition name="toast">
         <div
             class="my-4 w-full bg-red-500 text-white"

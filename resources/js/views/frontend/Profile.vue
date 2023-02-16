@@ -1,5 +1,38 @@
 <script setup>
-import CarteFidele from "@/components/CarteFidele.vue"
+import CarteFidele from "@/components/CarteFidele.vue";
+import { useRoute } from 'vue-router';
+import { onMounted, ref, watch } from 'vue';
+import useUser from "@/composables/useUser";
+
+const {
+    getUserType,
+    users,
+    loading,
+    errors,
+    cleanErrors,
+} = useUser();
+
+const officialParish = ref(0);
+const route = useRoute();
+const props = defineProps({
+    userType: String
+});
+
+onMounted(async function() {
+    if('parish_official' in route.query){
+        officialParish.value = 1;
+    }
+
+    await getUserType(props.userType, officialParish.value);
+})
+
+watch(props, async function(nProps, oProps) {
+    if('parish_official' in route.query){
+        officialParish.value = 1;
+    }
+
+    await getUserType(nProps.userType, officialParish.value);
+})
 
 const data = [
     {
@@ -98,11 +131,11 @@ const data = [
 <template>
     <div class="w-full  min-h-screen bg-white overflow-x-hidden">
         <div class="w-full h-auto py-16 flex flex-col items-center justify-center">
-            <h1 class="font-semibold text-2xl md:text-4xl text-zinc-800 ">Découvrez nos Fidèles </h1>
+            <h1 class="font-semibold text-2xl md:text-4xl text-zinc-800 ">Découvrez nos {{ userType }} </h1>
             <p class="text-sm md:text-lg text-zinc-600 my-4 text-center w-2/3 md:w-1/3">Lorem ipsum dolor sit amet consectetur adipisicing elit. accusantium recusandae deserunt.</p>
             
             <div class="flex flex-col md:flex-row items-center justify-center w-full md:my-6 p-3">
-                <input class="w-full md:w-1/3 border-gray-300 mt-1 border form-input p-2 outline-none block rounded-lg shadow-sm" type="text" placeholder="Nom du fidèle"/>
+                <input class="w-full md:w-1/3 border-gray-300 mt-1 border form-input p-2 outline-none block rounded-lg shadow-sm" type="text" placeholder="Nom"/>
                 <button class="flex items-center justify-center border-none mt-4 md:mt-1 h-10 w-36 md:w-12 md:ml-3 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl shadow">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="text-white w-6 h-6 mr-3 md:mr-0">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -350,11 +383,11 @@ const data = [
                         </div>
             </div>
         </div>
-        <div class="w-full grid grid-cols-1  md:grid-cols-3 gap-3 md:gap-6">
-
-             
-            <CarteFidele v-for="d,index in data" :key="index" :data="d" />
-
+        <div class="w-full grid grid-cols-1  md:grid-cols-3 gap-3 md:gap-6" v-if="users.length != 0">
+            <CarteFidele v-for="d,index in users" :key="index" :data="d" />
+        </div>
+        <div v-else>
+            Aucun Resultat
         </div>
         </div>
     </div>

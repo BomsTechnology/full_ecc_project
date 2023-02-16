@@ -17,12 +17,13 @@ export default function useUsers() {
     const searchField = ref("username");
     const searchValue = ref("");
     const headers = [
-       // { text: "Image", value: "avatar" },
+       { text: "Avatar", value: "avatar" },
         { text: "Name", value: "username" },
-      //  { text: "Phone", value: "phone" },
+        { text: "Phone", value: "phone_number" },
         { text: "Email", value: "email" },
-        { text: "Role", value: "role.name" },
+       { text: "Role", value: "user_type" },
        { text: "Confirmed", value: "confirmed" },
+       { text: "Blocked", value: "blocked" },
         { text: "Action", value: "id" },
     ];
 
@@ -35,20 +36,15 @@ export default function useUsers() {
         errors.value = [];
         loading.value = true;
         await axiosClient
-            .get(`/users?populate=*`)
+            .get(`/users`)
             .then((response) => {
-                users.value = response.data;
+                users.value = response.data.data;
             })
             .catch((e) => {
                 loading.value = false;
-                if (e.response.status == 400) {
-                    if(e.response.data.error.details.errors){
-                        e.response.data.error.details.errors.forEach((err) => {
-                            errors.value.push(err.message);
-                        })
-                    }else{
-                    errors.value.push(e.response.data.error.message);
-                    }
+                if (e.response.status == 422) {
+                    for (const key in e.response.data.errors)
+                        errors.value.push(e.response.data.errors[key][0]);
                 } else {
                     errors.value.push(e.response.data.message);
                 }
@@ -63,30 +59,87 @@ export default function useUsers() {
 
     }
 
-    const deleteUser = async (id) => {
+    const getUserType = async (type, officialParish) => {
+        errors.value = [];
+        loading.value = true;
+        await axiosClient
+            .post(`/users/type/${type}`, {officialParish:officialParish})
+            .then((response) => {
+                users.value = response.data.data;
+            })
+            .catch((e) => {
+                loading.value = false;
+                if (e.response.status == 422) {
+                    for (const key in e.response.data.errors)
+                        errors.value.push(e.response.data.errors[key][0]);
+                } else {
+                    errors.value.push(e.response.data.message);
+                }
+                router.replace({
+                    name: route.name,
+                    hash: '#errors'
+                });
+            });
+    }
+
+    const deleteUsers = async () => {
+        if (selectArray.value.length != 0) {
+
+            const deleteIds = ref([]);
+            selectArray.value.forEach((d) => {
+                deleteIds.value.push(d.id);
+            });
+
+            const { reveal, onConfirm } = createConfirmDialog(ConfirmModal, {
+                question:
+                "Are you sure you want to delete its item(s)? All data will be permanently deleted. This action cannot be undone.",
+                title: "Delete User !!!",
+                confirmLabel: "Delete",
+                cancelLabel: "Cancel"
+            });
+            onConfirm(async () => {
+                await axiosClient
+                .delete(`/users/${JSON.stringify({ ...deleteIds.value })}`)
+                .then((response) => {
+                    getUsers();
+                })
+                .catch((e) => {
+                    loading.value = false;
+                    if (e.response.status == 422) {
+                        for (const key in e.response.data.errors)
+                            errors.value.push(e.response.data.errors[key][0]);
+                    } else {
+                        errors.value.push(e.response.data.message);
+                    }
+                    router.replace({
+                        name: route.name,
+                        hash: '#errors'
+                    });
+                });
+            });
+            reveal();
+        }
+    }
+
+    const confirmedUser = async (id) => {
         const { reveal, onConfirm } = createConfirmDialog(ConfirmModal, {
             question:
-              "Are you sure you want to delete its item(s)? All data will be permanently deleted. This action cannot be undone.",
-            title: "Delete User !!!",
-            confirmLabel: "Delete",
+              "Are you sure you want to Change Confirmed its item(s)? ",
+            title: "Change Confirmed Status!!!",
+            confirmLabel: "Change Confirmed",
             cancelLabel: "Cancel"
           });
           onConfirm(async () => {
             await axiosClient
-            .delete(`/users/${id}`)
+            .put(`/users/confirmed/${id}`)
             .then((response) => {
                 getUsers();
             })
             .catch((e) => {
                 loading.value = false;
-                if (e.response.status == 400) {
-                    if(e.response.data.error.details.errors){
-                        e.response.data.error.details.errors.forEach((err) => {
-                            errors.value.push(err.message);
-                        })
-                    }else{
-                    errors.value.push(e.response.data.error.message);
-                    }
+                if (e.response.status == 422) {
+                    for (const key in e.response.data.errors)
+                        errors.value.push(e.response.data.errors[key][0]);
                 } else {
                     errors.value.push(e.response.data.message);
                 }
@@ -99,30 +152,25 @@ export default function useUsers() {
         reveal();
     }
 
-    const toogleConfirmed = async (id, value) => {
+    const toogleBlocked = async (id) => {
         const { reveal, onConfirm } = createConfirmDialog(ConfirmModal, {
             question:
-              "Are you sure you want to Change Confirmed its item(s)? ",
-            title: "Change Confirmed !!!",
-            confirmLabel: "Change Confirmed",
+              "Are you sure you want to Change Blocked Status of its item(s)? ",
+            title: "Change Blocked Status !!!",
+            confirmLabel: "Change Blocked",
             cancelLabel: "Cancel"
           });
           onConfirm(async () => {
             await axiosClient
-            .post(`/users-permissions/users/toogleConfirmed/${id}`, {value: value})
+            .put(`/users/toogle-blocked/${id}`)
             .then((response) => {
                 getUsers();
             })
             .catch((e) => {
                 loading.value = false;
-                if (e.response.status == 400) {
-                    if(e.response.data.error.details.errors){
-                        e.response.data.error.details.errors.forEach((err) => {
-                            errors.value.push(err.message);
-                        })
-                    }else{
-                    errors.value.push(e.response.data.error.message);
-                    }
+                if (e.response.status == 422) {
+                    for (const key in e.response.data.errors)
+                        errors.value.push(e.response.data.errors[key][0]);
                 } else {
                     errors.value.push(e.response.data.message);
                 }
@@ -147,7 +195,9 @@ export default function useUsers() {
         isFinish,
         getUser,
         cleanErrors,
-        deleteUser,
-        toogleConfirmed,
+        deleteUsers,
+        confirmedUser,
+        toogleBlocked,
+        getUserType,
     }
 }

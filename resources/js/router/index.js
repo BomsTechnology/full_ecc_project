@@ -165,15 +165,16 @@ const router = createRouter({
       },
     },
     {
-      path: '/profils/fideles',
-      name: 'fideles',
+      path: '/profiles/:userType',
+      name: 'profile',
+      props: true,
       components: {
-        default: () => import('@/views/frontend/Fidele.vue'),
+        default: () => import('@/views/frontend/Profile.vue'),
         header: Header,
         footer: Footer,
       },
       meta: {
-        title: SITE_NAME + " - Fidèles",
+        title: SITE_NAME + " - Profiles",
       },
     },
     {
@@ -202,7 +203,7 @@ const router = createRouter({
     },
     {
       path: '/profil',
-      name: 'profil',
+      name: 'account',
       components: {
         default: () => import('@/views/frontend/Profil.vue'),
         header: Header,
@@ -296,7 +297,7 @@ router.beforeEach((to, from, next) => {
       to.meta.requiresAuth &&
       (
           !auth.user ||
-          auth.user.role.name !=  "Admin" ||
+          auth.user.user_type!=  "admin" ||
           !auth.tokenUser
       )
   ) {

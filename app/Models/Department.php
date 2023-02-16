@@ -15,4 +15,14 @@ class Department extends Model
         'name_es',
         'city_id',
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

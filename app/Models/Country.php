@@ -15,4 +15,19 @@ class Country extends Model
         'name_es',
         'zoned_id',
     ];
+
+    public function zoned()
+    {
+        return $this->belongsTo(Zoned::class);
+    }
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

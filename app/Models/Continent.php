@@ -14,4 +14,14 @@ class Continent extends Model
         'name_en',
         'name_es',
     ];
+
+    public function zoneds()
+    {
+        return $this->hasMany(Zoned::class);
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

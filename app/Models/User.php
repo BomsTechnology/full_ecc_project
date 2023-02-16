@@ -60,4 +60,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function continent(){
+        return $this->belongsTo(Continent::class);
+    }
+
+    public function zoned(){
+        return $this->belongsTo(Zoned::class);
+    }
+
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class);
+    }
+
+    public function department(){
+        return $this->belongsTo(Department::class);
+    }
 }

@@ -15,4 +15,19 @@ class City extends Model
         'name_es',
         'country_id',
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function departments()
+    {
+        return $this->hasMany(Department::class);
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

@@ -44,6 +44,9 @@ let open = reactive({
         <router-link
             :to="{
                 name: 'account',
+                params: {
+                  id: auth.user.id
+                }
             }"
             class="lg:flex hidden items-center space-x-3"
             
@@ -308,6 +311,9 @@ let open = reactive({
         <router-link
             :to="{
                 name: 'account',
+                params: {
+                  id: auth.user.id
+                }
             }"
             class="flex flex-row-reverse  justify-end items-center  w-full "
             

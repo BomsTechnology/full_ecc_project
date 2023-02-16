@@ -24,7 +24,7 @@ onMounted(async function() {
     }
 
     await getUserType(props.userType, officialParish.value);
-})
+});
 
 watch(props, async function(nProps, oProps) {
     if('parish_official' in route.query){
@@ -34,99 +34,7 @@ watch(props, async function(nProps, oProps) {
     await getUserType(nProps.userType, officialParish.value);
 })
 
-const data = [
-    {
-        name: 'Sigha',
-        surname: 'Marc',
-        email: 'marcsigha@gmail.com',
-        country: 'Cameroun',
-        city: 'Douala',
-        sex: 'Homme',
-        ministry: 'Prédicateur'
-    },
-    {
-        name: 'Mbakop',
-        surname: 'Alfred',
-        email: 'mbakopal@gmail.com',
-        country: 'Cameroun',
-        city: 'Douala',
-        sex: 'Homme',
-        ministry: 'Chorale'
-    },
-    {
-        name: 'Sigha',
-        surname: 'Marc',
-        email: 'marcsigha@gmail.com',
-        country: 'Cameroun',
-        city: 'Douala',
-        sex: 'Homme',
-        ministry: 'Prédicateur'
-    },
-    {
-        name: 'Mbakop',
-        surname: 'Alfred',
-        email: 'mbakopal@gmail.com',
-        country: 'Cameroun',
-        city: 'Douala',
-        sex: 'Homme',
-        ministry: 'Chorale'
-    },
-    {
-        name: 'Sigha',
-        surname: 'Marc',
-        email: 'marcsigha@gmail.com',
-        country: 'Cameroun',
-        city: 'Douala',
-        sex: 'Homme',
-        ministry: 'Prédicateur'
-    },
-    {
-        name: 'Mbakop',
-        surname: 'Alfred',
-        email: 'mbakopal@gmail.com',
-        country: 'Cameroun',
-        city: 'Douala',
-        sex: 'Homme',
-        ministry: 'Chorale'
-    },
-    {
-        name: 'Sigha',
-        surname: 'Marc',
-        email: 'marcsigha@gmail.com',
-        country: 'Cameroun',
-        city: 'Douala',
-        sex: 'Homme',
-        ministry: 'Prédicateur'
-    },
-    {
-        name: 'Mbakop',
-        surname: 'Alfred',
-        email: 'mbakopal@gmail.com',
-        country: 'Cameroun',
-        city: 'Douala',
-        sex: 'Homme',
-        ministry: 'Chorale'
-    },
-    {
-        name: 'Sigha',
-        surname: 'Marc',
-        email: 'marcsigha@gmail.com',
-        country: 'Cameroun',
-        city: 'Douala',
-        sex: 'Homme',
-        ministry: 'Prédicateur'
-    },
-    {
-        name: 'Mbakop',
-        surname: 'Alfred',
-        email: 'mbakopal@gmail.com',
-        country: 'Cameroun',
-        city: 'Douala',
-        sex: 'Homme',
-        ministry: 'Chorale'
-    },
 
-]
 </script>
 <template>
     <div class="w-full  min-h-screen bg-white overflow-x-hidden">

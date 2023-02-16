@@ -56,7 +56,26 @@ export default function useUsers() {
     }
 
     const getUser = async (id) => {
-
+        errors.value = [];
+        loading.value = true;
+        await axiosClient
+            .get(`/users/${id}`)
+            .then((response) => {
+                user.value = response.data.data;
+            })
+            .catch((e) => {
+                loading.value = false;
+                if (e.response.status == 422) {
+                    for (const key in e.response.data.errors)
+                        errors.value.push(e.response.data.errors[key][0]);
+                } else {
+                    errors.value.push(e.response.data.message);
+                }
+                router.replace({
+                    name: route.name,
+                    hash: '#errors'
+                });
+            });
     }
 
     const getUserType = async (type, officialParish) => {

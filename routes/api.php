@@ -27,9 +27,10 @@ Route::get("/departments", [DepartmentController::class, 'index']);
 
 Route::post("/users/type/{type}", [UserController::class, 'getByType']);
 
+Route::apiResource('users', UserController::class);
+
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
-    Route::apiResource('users', UserController::class);
     Route::put("/users/confirmed/{user}", [UserController::class, 'confirmed']);
     Route::put("/users/toogle-blocked/{user}", [UserController::class, 'toogleBlocked']);
 

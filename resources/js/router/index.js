@@ -202,15 +202,16 @@ const router = createRouter({
       },
     },
     {
-      path: '/profil',
+      path: '/account/:id',
       name: 'account',
+      props: true,
       components: {
-        default: () => import('@/views/frontend/Profil.vue'),
+        default: () => import('@/views/frontend/Account.vue'),
         header: Header,
         footer: Footer,
       },
       meta: {
-        title: SITE_NAME + " - Profil",
+        title: SITE_NAME + " - Account",
       },
     },
     {

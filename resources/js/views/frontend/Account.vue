@@ -1,6 +1,25 @@
 <script setup>
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
-import { RouterLink, RouterView } from 'vue-router'
+import { onMounted, ref, watch } from 'vue';
+import useUser from "@/composables/useUser";
+import { UserCircleIcon } from '@heroicons/vue/24/solid';
+
+const {
+    getUser,
+    user,
+    loading,
+    errors,
+    cleanErrors,
+} = useUser();
+
+const props = defineProps({
+    id: String
+});
+
+onMounted(async function() {
+    await getUser(props.id);
+});
+
 polyfillCountryFlagEmojis();
 </script>
 <template>
@@ -8,15 +27,23 @@ polyfillCountryFlagEmojis();
         <div class="flex flex-col items-center w-5/6 h-auto rounded-xl shadow-md my-8 overflow-clip bg-white mx-auto">
             <div class="w-full p-20 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600"></div>
             <div class="w-full min-h-32 p-8">
-                <div class="w-36 h-36 rounded-full overflow-clip shadow -mt-28">
-                    <img src="/assets/bdt.jpg" class="w-full h-full object-cover"/>
+                <div class="w-36 h-36 rounded-full bg-white overflow-clip shadow -mt-28">
+                    <img v-if="
+                        user.avatar != null &&
+                        user.avatar != 'null'
+                    " :src="user.avatar "
+                    :alt="user.username" class="w-full h-full object-cover"/>
+                    <UserCircleIcon
+                        v-else
+                        class="h-full w-full text-gray-500"
+                    />
                 </div>
-                <h1 class="font-semibold text-zinc-800 text-2xl my-3">Marc Sigha</h1>
-                <h1 class="font-medium text-zinc-600 text-lg">&#127464;&#127474; &nbsp; Douala, Cameroun</h1>
+                <h1 class="font-semibold text-zinc-800 text-2xl my-3">{{ user.username }}</h1>
+                <!--<h1 class="font-medium text-zinc-600 text-lg">&#127464;&#127474; &nbsp; Douala, Cameroun</h1>-->
                 <div class="flex items-center my-3">
-                    <h2 class="text-zinc-500 text-md">marcsigha@gmail.com</h2> <div class="w-1.5 h-1.5 mt-1 mx-2 bg-slate-300 rounded-full"></div>
-                    <h2 class="text-zinc-500 text-md">694567890</h2> <div class="w-1.5 h-1.5 mt-1 mx-2 bg-slate-300 rounded-full"></div>
-                    <h2 class="text-zinc-500 text-md">Fidèle</h2>
+                    <h2 class="text-zinc-500 text-md">{{ user.email }}</h2> <div class="w-1.5 h-1.5 mt-1 mx-2 bg-slate-300 rounded-full"></div>
+                    <h2 class="text-zinc-500 text-md">{{ user.phone_number }}</h2> <div class="w-1.5 h-1.5 mt-1 mx-2 bg-slate-300 rounded-full"></div>
+                    <h2 class="text-zinc-500 text-md">{{ user.user_type }}</h2>
                 </div>
                 <div class="flex items-center mt-10">
                     <div class="flex items-center p-2 rounded-lg bg-gradient-to-r from-blue-700 to-blue-600 ">

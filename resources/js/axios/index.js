@@ -3,6 +3,7 @@ import { useAuthenticateStore } from "@/stores/authenticate";
 const auth = useAuthenticateStore();
 const TOKEN_PUBLIC = '';
 const token = auth.tokenUser ? auth.tokenUser : TOKEN_PUBLIC;
+
 const axiosClient = axios.create({
     baseURL: `/api`,
 });

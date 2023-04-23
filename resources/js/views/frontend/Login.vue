@@ -19,6 +19,9 @@ const user = reactive({
 
 const login = async () => {
     await loginUser({...user});
+    if(errors.value.length == 0){
+        location.href = '/'
+    }
 }
 </script>
 <template>

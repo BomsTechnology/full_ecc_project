@@ -44,7 +44,9 @@ export default function useAuth() {
         await axiosClient
             .post(`/login`, data)
             .then((response) => {
-                console.log(response.data)
+                localStorage.user = JSON.stringify(response.data.data.user);
+                localStorage.tokenUser = response.data.data.token;
+                loading.value = false;
             })
             .catch((e) => {
                 loading.value = false;

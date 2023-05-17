@@ -98,10 +98,10 @@ let open = reactive({
              </span>
           </div>
           <div class="absolute z-50 hidden bg-white w-52 shadow top-full left-0 rounded-b-lg text-base  group-hover:block">
-                  <router-link :to="{name:'article'}"  class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Messages</router-link>
-                  <a href="/jobs" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Jobs</a>
-                  <router-link :to="{name:'calendrier'}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Evenements</router-link>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2 rounded-b-lg  font-semibold block">Annonces</a>
+            <router-link :to="{name:'messages'}"  class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Messages</router-link>
+                  <router-link :to="{name: 'jobs'}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Jobs</router-link>
+                  <router-link :to="{name:'evenements'}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Evenements</router-link>
+                  <router-link :to="{name: 'annonces'}" class="hover:text-white hover:bg-red-500 px-4 py-2 rounded-b-lg  font-semibold block">Annonces</router-link>
           </div>
         </li>
         <li class="relative group py-4">
@@ -148,7 +148,7 @@ let open = reactive({
                   <router-link :to="{name:'cantique'}" class="hover:text-white hover:bg-red-500 px-4 py-2 rounded-b-lg  font-semibold block">Partitions</router-link>
           </div>
         </li>
-        <li class="py-4"><router-link :to="{name:'home'}" class="cursor-pointer p-2 rounded-lg text-left font-semibold text-gray-500 hover:bg-red-500 hover:text-white">Formations</router-link></li>
+        <li class="py-4"><router-link :to="{name:'formation'}" class="cursor-pointer p-2 rounded-lg text-left font-semibold text-gray-500 hover:bg-red-500 hover:text-white">Formations</router-link></li>
         <li class="relative group py-4">
           <div class="cursor-pointer p-2 rounded-lg text-left font-semibold flex items-center  text-gray-500 group-hover:bg-red-500 group-hover:text-white">
             <span>Documents</span>  
@@ -200,10 +200,10 @@ let open = reactive({
             leave-to-class="translate-x-1/2 opacity-0 "
         >
           <div @click="open.menu =!open.menu" class="shadow  rounded-lg my-2 bg-gray-50 text-sm overflow-hidden" v-if="open.submenu.publication">
-                  <router-link :to="{name:'article'}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold  block">Messages</router-link>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Jobs</a>
-                  <router-link :to="{name:'calendrier'}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Evenements</router-link>
-                  <a href="#" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Annonces</a>
+                  <router-link :to="{name:'messages'}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold  block">Messages</router-link>
+                  <router-link :to="{name: 'jobs'}"  class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Jobs</router-link>
+                  <router-link :to="{name:'evenements'}" class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Evenements</router-link>
+                  <router-link :to="{name: 'annonces'}"  class="hover:text-white hover:bg-red-500 px-4 py-2  font-semibold block">Annonces</router-link>
           </div>
           </Transition>
         </li>
@@ -232,7 +232,7 @@ let open = reactive({
           </div>
           </Transition>
         </li>
-        <li class="py-1 px-6 w-full"><router-link :to="{name:'home'}" class="cursor-pointer p-2  text-left block font-semibold text-gray-500 hover:bg-red-500 focus:bg-red-500 w-full hover:text-white">Paroisses</router-link></li>
+        <li class="py-1 px-6 w-full"><router-link :to="{name:'paroisses'}" class="cursor-pointer p-2  text-left block font-semibold text-gray-500 hover:bg-red-500 focus:bg-red-500 w-full hover:text-white">Paroisses</router-link></li>
         <li class="relative py-1 px-6 w-full">
           <div @click="open.submenu.multimedia = !open.submenu.multimedia" class="cursor-pointer p-2 text-left font-semibold flex justify-between w-full items-center  text-gray-500 hover:bg-red-500 hover:text-white">
             <span>Multimédia</span>  
@@ -278,7 +278,7 @@ let open = reactive({
           </div>
           </Transition>
         </li>
-        <li class="py-1 px-6 w-full"><router-link :to="{name:'home'}" class="cursor-pointer p-2  text-left block font-semibold text-gray-500 hover:bg-red-500 focus:bg-red-500 w-full hover:text-white">Formations</router-link></li>
+        <li class="py-1 px-6 w-full"><router-link :to="{name:'formation'}" class="cursor-pointer p-2  text-left block font-semibold text-gray-500 hover:bg-red-500 focus:bg-red-500 w-full hover:text-white">Formations</router-link></li>
         <li class="relative py-1 px-6 w-full">
           <div @click="open.submenu.document = !open.submenu.document" class="cursor-pointer p-2 text-left font-semibold flex justify-between w-full items-center  text-gray-500 hover:bg-red-500 hover:text-white">
             <span>Documents</span>  

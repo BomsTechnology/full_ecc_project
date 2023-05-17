@@ -7,7 +7,7 @@
 
         <div class="flex flex-col md:flex-row items-center justify-start p-4 md:p-6 mt-20">
          <div class="w-[596px] h-[560px] ">
-            <img src="/assets/abt.jpg" class="w-full h-full object-cover"/>
+            <img src="../../assets/abt.jpg" class="w-full h-full object-cover"/>
          </div>
 
          <div class="flex flex-col items-start justify-start w-full md:w-[60%] md:ml-20 mt-12 md:mt-0">
@@ -55,7 +55,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center my-16">
                 <div class="w-[328px] h-[448px]   shadow-sm ">
                     <div class="w-[100%] h-[80%] overflow-clip ">
-                        <img src="/assets/met.jpg" class="w-full h-full object-cover "/>
+                        <img src="../../assets/met.jpg" class="w-full h-full object-cover "/>
                     </div>
                     <div class="w-full flex flex-col items-center h-[20%] bg-blue-700 border-b-4 border-yellow-400 p-2">
                         <h1 class="font-bold text-xl mt-1 text-white">Jackson</h1>
@@ -67,7 +67,7 @@
 
                 <div class="w-[328px] h-[448px]   shadow-sm mx-8">
                     <div class="w-[100%] h-[80%] overflow-clip ">
-                        <img src="/assets/met.jpg" class="w-full h-full object-cover "/>
+                        <img src="../../assets/met.jpg" class="w-full h-full object-cover "/>
                     </div>
                     <div class="w-full flex flex-col items-center h-[20%] bg-blue-700 border-b-4 border-yellow-400 p-2">
                         <h1 class="font-bold text-xl mt-1 text-white">Jackson</h1>
@@ -79,7 +79,7 @@
 
                 <div class="w-[328px] h-[448px]   shadow-sm ">
                     <div class="w-[100%] h-[80%] overflow-clip ">
-                        <img src="/assets/met.jpg" class="w-full h-full object-cover "/>
+                        <img src="../../assets/met.jpg" class="w-full h-full object-cover "/>
                     </div>
                     <div class="w-full flex flex-col items-center h-[20%] bg-blue-700 border-b-4 border-yellow-400 p-2">
                         <h1 class="font-bold text-xl mt-1 text-white">Jackson</h1>

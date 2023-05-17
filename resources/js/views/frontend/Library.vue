@@ -4,7 +4,7 @@
 <template>
     <div class="flex flex-col min-h-screen bg-slate-100">
         
-        <div class="relative w-full h-[60vh] bg-[url('/assets/library.jpg')] bg-cover bg-no-repeat bg-center flex flex-col items-start justify-end">
+        <div class="relative w-full h-[60vh] bg-[url('../assets/library.jpg')] bg-cover bg-no-repeat bg-center flex flex-col items-start justify-end">
             <div class="absolute top-0 w-full h-[49.5vh] bg-zinc-900/50"></div>
 <div class="relative flex flex-col items-start w-[52%] h-full p-6 my-4">
 <h5 class="font-semibold text-blue-500 text-md">Bibliotheque</h5>

@@ -26,7 +26,7 @@ onMounted(async () => {
     <div class="flex items-center justify-center w-full min-h-screen p-3 bg-white">
         <div class="flex flex-col items-center justify-center w-1/2 p-4 h-auto bg-slate-100 rounded-lg shadow">
             <div class="relative w-36 h-36 rounded-full overflow-clip shadow">
-                    <img src="/assets/bdt.jpg" class="relative w-full h-full object-cover"/>
+                    <img src="../../assets/bdt.jpg" class="relative w-full h-full object-cover"/>
                     <div class="absolute w-6 h-6 rounded-full bg-gray-400"></div>
                 </div>
 

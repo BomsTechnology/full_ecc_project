@@ -9,7 +9,7 @@ const titre = ref("Contactez-nous !");</script>
     <div class="flex w-full h-auto">
             <div class="flex flex-col items-center justify-center w-[68%] min-h-[540px] bg-white p-3">
                 <div class="relative flex items-center justify-center w-[92%] h-[480px]  my-10">
-                <img src="/assets/bc3.jpg" class="relative object-cover h-full w-full rounded-lg"/>
+                <img src="../../assets/bc3.jpg" class="relative object-cover h-full w-full rounded-lg"/>
 
                 <div class="absolute flex items-center justify-center -bottom-8 w-3/4  shadow-md h-20 bg-white">
                     <div class="w-7 h-7 rounded-full bg-zinc-900"></div>
@@ -42,11 +42,11 @@ const titre = ref("Contactez-nous !");</script>
             <div class=" flex items-center justify-around w-[92%] my-12">
 
                 <div class="w-[calc(92%/2)] h-[220px] overflow-clip rounded-lg">
-                <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
             </div>
 
             <div class="w-[calc(92%/2)] h-[220px] overflow-clip rounded-lg">
-                <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
             </div>
             </div>
 
@@ -165,7 +165,7 @@ const titre = ref("Contactez-nous !");</script>
                     <div class="flex flex-col">
                         <div class="flex items-center justify-center my-3 h-[68%]">
                     <div class="w-28 h-16 overflow-clip rounded-md mr-3">
-                        <img src="/assets/bc2.jpg" class="w-full h-full object-cover "/>
+                        <img src="../../assets/bc2.jpg" class="w-full h-full object-cover "/>
                     </div>
                     <div class="flex flex-col">
                         <h3 class="font-semibold text-zinc-800 text-mdse w-[92%]">L'Esprit Du Seigneur Est, De La Nouvelle Vie.</h3>
@@ -182,7 +182,7 @@ const titre = ref("Contactez-nous !");</script>
 
                         <div class="flex items-center justify-center my-3 h-[68%]">
                     <div class="w-28 h-16 overflow-clip rounded-md mr-3">
-                        <img src="/assets/bc1.jpg" class="w-full h-full object-cover "/>
+                        <img src="../../assets/bc1.jpg" class="w-full h-full object-cover "/>
                     </div>
                     <div class="flex flex-col ">
                         <h3 class="font-semibold text-zinc-800 text-mdse w-[92%]">Donner en retour - Centres de formation en Ouganda.</h3>
@@ -198,7 +198,7 @@ const titre = ref("Contactez-nous !");</script>
 
                 <div class="flex items-center justify-center my-3 h-[68%]">
                     <div class="w-28 h-16 overflow-clip rounded-md mr-3">
-                        <img src="/assets/bc1.jpg" class="w-full h-full object-cover "/>
+                        <img src="../../assets/bc1.jpg" class="w-full h-full object-cover "/>
                     </div>
                     <div class="flex flex-col ">
                         <h3 class="font-semibold text-zinc-800 text-mdse w-[92%]">Donner en retour - Centres de formation en Ouganda.</h3>

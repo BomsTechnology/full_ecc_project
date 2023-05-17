@@ -10,7 +10,7 @@
 
         <div class="flex flex-col items-center justify-center mx-auto w-full min-h-[80vh] px-4 pt-20 pb-12 ">
             <div class="w-[92%] h-[580px] overflow-clip rounded-lg mb-10">
-                <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
             </div>
 
             <div class="flex w-[92%] h-auto">
@@ -22,38 +22,38 @@
                     <div class=" flex items-center justify-around w-[92%] my-12">
 
                     <div class="w-[296px] h-[200px] overflow-clip rounded-lg">
-                    <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                    <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
                     </div>
 
                     <div class="w-[296px] h-[200px] overflow-clip rounded-lg">
-                    <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                    <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
                     </div>
                     </div>
                     <h1 class="text-zinc-800 tracking-tight text-3xl font-bold my-8">Event <span class="text-blue-500">Gallery</span></h1>
                     <p class="w-full text-justify text-lg text-zinc-600 tracking-wide leading-wide my-6">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam, eaque quia. Quibusdam eaque quo quos, dicta, dignissimos voluptate ipsum.</p>
                     <div class="w-[92%] grid grid-cols-3 gap-6">
                         <div class="w-[228px] h-[160px] overflow-clip rounded-lg">
-                    <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                    <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
                     </div>
 
                     <div class="w-[228px] h-[160px] overflow-clip rounded-lg">
-                    <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                    <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
                     </div>
 
                     <div class="w-[228px] h-[160px] overflow-clip rounded-lg">
-                    <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                    <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
                     </div>
 
                     <div class="w-[228px] h-[160px] overflow-clip rounded-lg">
-                    <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                    <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
                     </div>
 
                     <div class="w-[228px] h-[160px] overflow-clip rounded-lg">
-                    <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                    <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
                     </div>
 
                     <div class="w-[228px] h-[160px] overflow-clip rounded-lg">
-                    <img src="/assets/bc3.jpg" class="object-cover h-full w-full"/>
+                    <img src="../../assets/bc3.jpg" class="object-cover h-full w-full"/>
                     </div>
                     </div>
                     <div class="flex items-center justify-around  p-10 w-full  min-h-24 bg-slate-800/70 my-6">

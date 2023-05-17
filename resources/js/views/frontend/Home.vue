@@ -1,10 +1,10 @@
 <script setup>
-import BannerCards from '@/components/BannerCards.vue';
-import EventCards from '@/components/EventCards.vue';
-import AboutUs from '@/components/AboutUs.vue'
-import DonateSection from '@/components/DonateSection.vue';
-import Ministries from '@/components/Ministries.vue';
-import BlogSection from '@/components/BlogSection.vue';
+import BannerCards from '../../components/BannerCards.vue';
+import EventCards from '../../components/EventCards.vue';
+import AboutUs from '../../components/AboutUs.vue'
+import DonateSection from '../../components/DonateSection.vue';
+import Ministries from '../../components/Ministries.vue';
+import BlogSection from '../../components/BlogSection.vue';
 
 </script>
 

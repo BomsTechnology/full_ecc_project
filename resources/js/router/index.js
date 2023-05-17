@@ -93,15 +93,27 @@ const router = createRouter({
       },
     },
     {
-      path: '/article',
-      name: 'article',
+      path: '/Messages',
+      name: 'messages',
       components: {
-        default:() => import('@/views/frontend/Article.vue'),
+        default:() => import('@/views/frontend/Articles.vue'),
         header: Header,
         footer: Footer,
       },
       meta: {
-        title: SITE_NAME + " - Article",
+        title: SITE_NAME + " - Messages",
+      },
+    },
+    {
+      path: '/annonces',
+      name: 'annonces',
+      components: {
+        default:() => import('@/views/frontend/Annonces.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Annonces",
       },
     },
     {
@@ -114,6 +126,18 @@ const router = createRouter({
       },
       meta: {
         title: SITE_NAME + " - Library",
+      },
+    },
+    {
+      path: '/formation',
+      name: 'formation',
+      components: {
+        default:() => import('@/views/frontend/Formations.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Formations",
       },
     },
     {
@@ -141,15 +165,15 @@ const router = createRouter({
       },
     },
     {
-      path: '/calendrier',
-      name: 'calendrier',
+      path: '/evenements',
+      name: 'evenements',
       components: {
         default: () => import('@/views/frontend/Calendar.vue'),
         header: Header,
         footer: Footer,
       },
       meta: {
-        title: SITE_NAME + " - Calendar",
+        title: SITE_NAME + " - Evenements",
       },
     },
     {
@@ -169,7 +193,7 @@ const router = createRouter({
       name: 'profile',
       props: true,
       components: {
-        default: () => import('@/views/frontend/Profile.vue'),
+        default: () => import('@/views/frontend/Fidele.vue'),
         header: Header,
         footer: Footer,
       },
@@ -177,6 +201,54 @@ const router = createRouter({
         title: SITE_NAME + " - Profiles",
       },
     },
+   /* {
+      path: '/profils/charge_paroissial',
+      name: 'charge_paroissial',
+      components: {
+        default: () => import('@/views/frontend/ChargePar.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Chargés paroissiaux",
+      },
+    },
+    {
+      path: '/profils/GDP',
+      name: 'GDP',
+      components: {
+        default: () => import('@/views/frontend/Gdp.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Groupes de prières",
+      },
+    },
+    {
+      path: '/profils/dioceses',
+      name: 'dioceses',
+      components: {
+        default: () => import('@/views/frontend/Diocese.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Diocèses",
+      },
+    },
+    {
+      path: '/profils/sieges',
+      name: 'sieges',
+      components: {
+        default: () => import('@/views/frontend/Siege.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Sièges",
+      },
+    },*/
     {
       path: '/login',
       name: 'login',
@@ -202,16 +274,15 @@ const router = createRouter({
       },
     },
     {
-      path: '/account/:id',
-      name: 'account',
-      props: true,
+      path: '/profil',
+      name: 'profil',
       components: {
-        default: () => import('@/views/frontend/Account.vue'),
+        default: () => import('@/views/frontend/Profil.vue'),
         header: Header,
         footer: Footer,
       },
       meta: {
-        title: SITE_NAME + " - Account",
+        title: SITE_NAME + " - Profil",
       },
     },
     {
@@ -224,6 +295,19 @@ const router = createRouter({
       },
       meta: {
         title: SITE_NAME + " - Edit profil",
+      },
+    },
+    {
+      path: '/account/:id',
+      name: 'account',
+      props: true,
+      components: {
+        default: () => import('@/views/frontend/Account.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Account",
       },
     },
     {

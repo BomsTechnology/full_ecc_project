@@ -7,7 +7,7 @@ polyfillCountryFlagEmojis();
 
 <template>
     <div class="flex flex-col min-h-screen bg-slate-100">
-      <div class="w-full h-[60vh] bg-[url('/assets/praise.jpg')] bg-cover bg-no-repeat bg-right flex flex-col items-start justify-end">
+      <div class="w-full h-[60vh] bg-[url('../assets/praise.jpg')] bg-cover bg-no-repeat bg-right flex flex-col items-start justify-end">
 
           <div class="flex flex-col items-start w-[52%] h-full p-6 my-4">
           <h5 class="font-semibold text-blue-500 text-md">Liste de Cantiques</h5>
